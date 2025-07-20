@@ -4,6 +4,9 @@ A Flask-based web interface for browsing image/audio training sets stored in a f
 It dynamically loads training sets, displays corresponding `.jpg` and `.m4a` files,
 and provides simple navigation and diagnostics.
 
+![Screenshot of training-app-3000](/screenshots/training-app-3000_screen1.jpg)
+
+
 ---
 
 ## 🚀 Features
