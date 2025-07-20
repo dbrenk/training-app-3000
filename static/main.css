@@ -1,0 +1,226 @@
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex: 1;
+    padding: 1em;
+}
+
+body {
+  background-color: #E6F4F9;
+  color: #2C3E50;
+  font-family: sans-serif;
+  justify-content: space-between;
+}
+
+button.primary {
+  background-color: #0078D7;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+}
+
+button.primary:hover {
+  background-color: #005A9E;
+}
+
+.secondary-text {
+  color: #7F8C8D;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2em;
+}
+
+.app-title {
+  font-size: 1.8em;
+  color: #007acc; /* or use your primary color */
+  margin: 0;
+}
+
+.app-body {
+  font-family: sans-serif;
+  margin: 2em;
+  text-align: center;
+}
+
+.logo-image {
+  height: 80px;
+  border: 2px solid #0078D7;      /* or another color from your palette */
+  border-radius: 8px;             /* optional: rounded corners */
+  padding: 4px;                   /* optional: space inside the frame */
+  background-color: #0078D7;      /* optional: background inside the frame */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* optional: subtle shadow */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.responsive-image {
+  height: 50vh;
+  object-fit: contain;
+  width: 100%;
+  max-width: 800px; /* or any value that fits your layout */
+  display: block;
+  margin: 0 auto; /* centers the image horizontally */
+}
+
+audio {
+  filter: brightness(1.2) contrast(1.2);
+  outline: 2px solid #000;
+  border-radius: 4px;
+}
+
+.menu-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: #007acc;
+    padding: 0.5em;
+}
+
+.menu-bar a {
+    padding: 0.6em 1.2em;
+    margin: 0.3em;
+    text-decoration: none;
+    color: white;
+    background-color: #005f99;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.menu-bar a:hover {
+    background-color: #003f66;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .menu-bar {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu-bar a {
+        width: 80%;
+        text-align: center;
+    }
+}
+
+.accessible-button {
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007acc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.accessible-button:hover {
+    background-color: #005f99;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* space between buttons */
+    margin-top: 2em;
+    flex-wrap: wrap; /* allows wrapping on small screens */
+}
+
+.button-container a {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.play-button {
+    width: 100%;
+    max-width: 300px; /* allows it to grow but not exceed a limit */
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007acc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.play-button:hover {
+    background-color: #005f99;
+}
+
+/* Footer styling */
+.page-footer {
+    text-align: center;
+    font-size: 0.8em;
+    color: #666;
+    padding: 1em;
+}
+
+.page-footer a {
+    color: #666;
+    text-decoration: none;
+    margin: 0 0.5em;
+}
+
+.page-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Table styling for credits, status, etc. */
+.info-table {
+  margin: 1em auto;
+  border-collapse: collapse;
+  width: 90%;
+  max-width: 700px;
+  font-family: sans-serif;
+  font-size: 1rem;
+  color: #333;
+}
+
+.info-table tr {
+  border-bottom: 1px solid #ddd;
+}
+
+.info-table td {
+  padding: 0.75em 1em;
+  vertical-align: top;
+  text-align: left;
+}
+
+.info-table td:first-child {
+  font-weight: bold;
+  width: 35%;
+  white-space: nowrap;
+}
+
+.info-table a {
+  color: #0078D7;
+  text-decoration: none;
+}
+
+.info-table a:hover {
+  text-decoration: underline;
+}
+
+.info-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}

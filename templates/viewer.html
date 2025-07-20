@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>training-app-3000</title>
+	<link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/static/main.css">
+</head>
+    <body class="app-body">
+		 <div class="logo-container">
+			<a href="/viewer">
+				<img src="/static/logo.png" alt="Logo" class="logo-image">
+			</a>
+		</div>
+        <div style="margin-bottom:2em;">
+			<nav class="menu-bar">
+				{% for set in available_sets %}
+					<a href="/viewer?set={{ set }}&index=0">{{ set }}</a>
+				{% endfor %}
+			</nav>
+        </div>
+        <h2 class="secondary-text">Set: {{ set_name }}</h2>
+		<img src="{{ img_src }}" class="responsive-image" alt="{{ current_base }}" title="{{ current_base }}" />
+        <br>
+		<div style="margin-bottom:2em;">
+			{% if audio_tag %}
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
+				<script>
+				  window.audioSource = "{{ audio_tag }}";// Set your audio file path here
+				</script>
+				<script src="{{ url_for('static', filename='audio-controls.js') }}"></script>
+				<div id="audio-container">
+				  <button class="play-button" id="play-btn" aria-label="Play audio">🔊 Abspielen</button>
+				</div>
+			{% else %}
+				<!--<p>No audio available.</p>-->
+			{% endif %}
+		</div>
+        <br>
+		<div class="button-container">
+			<a href="/viewer?set={{ set_name }}&index={{ previous_index }}">
+				<button class="accessible-button" aria-label="Go to the previous item">Zurück</button>
+			</a>
+			<a href="/viewer?set={{ set_name }}&index={{ next_index }}">
+				<button class="accessible-button" aria-label="Go to the next item">Vor</button>
+			</a>
+		</div>
+		<footer class="page-footer">
+			<p>
+				<a href="/about">Über diese App</a>
+			</p>
+		</footer>
+		<!-- JavaScript for Keyboard and Swipe Navigation -->
+		<script>
+			const setName = "{{ set_name }}";
+			const previousIndex = "{{ previous_index }}";
+			const nextIndex = "{{ next_index }}";
+		</script>
+		<script src="{{ url_for('static', filename='viewer-navigation.js') }}"></script>
+		
+
+
+    </body>
+</html>

@@ -1,0 +1,1 @@
+docker save -o training-app.tar training-app

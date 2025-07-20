@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>About</title>
+	<link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/static/main.css">
+</head>
+<body class="app-body">
+    <div class="logo-container">
+		<a href="/viewer">
+			<img src="/static/logo.png" alt="Logo" class="logo-image">
+		</a>
+    </div>
+	<div style="margin-bottom:2em;">
+		<nav class="menu-bar">
+			<a href="/viewer">Zurück</a>
+		</nav>
+    </div>
+	<br>
+    <h1 class="app-title">training-app-3000</h1>
+	<br>
+	<h2 class="secondary-text">Über diese App</h2>
+	<br>
+	Viel Spass und Erfolg beim Üben!
+	<br>
+	<h2 class="secondary-text">Danksagung:</h2>
+	<table class="info-table">
+	  <tr>
+		<td><strong>Entwicklung:</strong></td>
+		<td>Daniel B.</td>
+	  </tr>
+	  <tr>
+		<td><strong>Fotografie und Artwork:</strong></td>
+		<td>Fabienne S.</td>
+	  </tr>
+	  <tr>
+		<td><strong>Audio:</strong></td>
+		<td>Fabienne S.</td>
+	  </tr>
+	  <tr>
+		<td><strong>Verwendete Frameworks:</strong></td>
+		<td>
+		  <a href="https://flask.palletsprojects.com/" target="_blank" rel="noopener noreferrer">Flask</a>,
+		  <a href="https://howlerjs.com/" target="_blank" rel="noopener noreferrer">Howler.js</a>
+		</td>
+	  </tr>
+	  <tr>
+		<td><strong>Besonderer Dank:</strong></td>
+		<td>Ciri – the dog who represents the concept of dogness!</td>
+	  </tr>
+	</table>
+	<br>
+	<h2 class="secondary-text">Status:</h2>
+	<br>
+	<table class="info-table">
+		{% for key, value in status_info.items() %}
+			<tr>
+				<td><strong>{{ key }}:</strong></td>
+				<td>{{ value }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+	<br>
+	<h2 class="secondary-text">Umgebungsvariablen:</h2>
+	<br>
+	<table class="info-table">
+		{% for key, value in environment_variables_info.items() %}
+			<tr>
+				<td><strong>{{ key }}:</strong></td>
+				<td>{{ value }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+</body>
+</html>
