@@ -6,7 +6,9 @@ WORKDIR /training-app
 
 # Copy your root files
 COPY training-app.py /training-app/training-app.py
+COPY config.py /training-app/config.py
 COPY log_config.py /training-app/log_config.py
+COPY logging.yaml /training-app/logging.yaml
 COPY requirements.txt /training-app/requirements.txt
 COPY README.md /training-app/README.md
 

@@ -18,11 +18,8 @@
     </div>
 	<br>
     <h1 class="app-title">training-app-3000</h1>
-	<br>
 	<h2 class="secondary-text">Über diese App</h2>
-	<br>
 	Viel Spass und Erfolg beim Üben!
-	<br>
 	<h2 class="secondary-text">Danksagung:</h2>
 	<table class="info-table">
 	  <tr>
@@ -46,12 +43,15 @@
 	  </tr>
 	  <tr>
 		<td><strong>Besonderer Dank:</strong></td>
-		<td>Ciri – the dog who represents the concept of dogness!</td>
+		<td>
+			<p>Ciri – the dog who represents the concept of dogness!</p>
+			<p>Paua - representing furry cat!</p>
+			<p>Bambina - representing Horses!</p>
+			<p>Bob the Sea-Turtle - representing Schildkröte!</p>
+		</td>
 	  </tr>
 	</table>
-	<br>
 	<h2 class="secondary-text">Status:</h2>
-	<br>
 	<table class="info-table">
 		{% for key, value in status_info.items() %}
 			<tr>
@@ -60,9 +60,7 @@
 			</tr>
 		{% endfor %}
 	</table>
-	<br>
 	<h2 class="secondary-text">Umgebungsvariablen:</h2>
-	<br>
 	<table class="info-table">
 		{% for key, value in environment_variables_info.items() %}
 			<tr>

@@ -1,36 +1,18 @@
-import logging
-from logging.handlers import RotatingFileHandler
+import logging.config
 import os
+import yaml
 
-def setup_logging(log_file='app.log'):
+def setup_logging(config_path='logging.yaml'):
     # Ensure log directory exists
-    LOG_DIR = "logs"
-    os.makedirs(LOG_DIR, exist_ok=True)
+    os.makedirs('logs', exist_ok=True)
 
-    # Configure loggers
-    formatter = logging.Formatter(
-        "%(asctime)s [%(levelname)s] %(name)s: %(message)s",
-        datefmt="%Y-%m-%d %H:%M:%S"
-    )
+    # Load YAML logging config
+    with open(config_path, 'r') as f:
+        config = yaml.safe_load(f)
 
-    # Console logger (StreamHandler logs to stdout for Docker)
-    console_handler = logging.StreamHandler()
-    console_handler.setFormatter(formatter)
+    # Allow dynamic log level override from environment
+    env_log_level = os.getenv("LOG_LEVEL", "INFO").upper() # Default to INFO if env var is not set
+    if env_log_level:
+        config['root']['level'] = env_log_level.upper()
 
-    # Rotating file logger
-    file_handler = RotatingFileHandler(
-        os.path.join(LOG_DIR, log_file), maxBytes=1_000_000, backupCount=5
-    )
-    file_handler.setFormatter(formatter)
-    
-    # Assign handlers to Flask's logger
-    logger = logging.getLogger()
-    #logger.setLevel(logging.INFO)
-
-    #log level config
-    log_level = os.getenv("LOG_LEVEL", "INFO").upper()
-    logger.setLevel(getattr(logging, log_level, logging.INFO))
-    
-    if not logger.handlers:
-        logger.addHandler(file_handler)
-        logger.addHandler(console_handler)
+    logging.config.dictConfig(config)

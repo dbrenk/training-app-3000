@@ -7,13 +7,11 @@ from flask import Flask, request, jsonify, render_template, render_template_stri
 from log_config import setup_logging
 from werkzeug.middleware.proxy_fix import ProxyFix
 from werkzeug.utils import safe_join
+from config import Config
 
 
 app = Flask(__name__, static_folder="static")
 
-
-def get_training_set_root_dir():
-    return app.config['TRAINING_SET_ROOT_DIR']
 
 def get_training_sets():
     if 'TRAINING_SETS' not in app.config:
@@ -63,15 +61,12 @@ def get_image_names(set_name):
     return images
 
 def startup_tasks():
+    app.config.from_object(Config)
     setup_logging()
     app.logger.info("Running startup tasks...")
-    app.logger.debug("log-level:" + os.getenv("LOG_LEVEL"))
     app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1) # Apply ProxyFix middleware
-    app.config['TRAINING_SET_ROOT_DIR'] = os.getenv('TRAINING_SET_ROOT_DIR', 'training_sets')
-    for set_name in get_training_sets():
-        app.logger.info(f"{set_name}: {get_image_names(set_name)}")
-    app.logger.info("Running startup tasks...")
-    app.config['TRAINING_SET_ROOT_DIR'] = os.getenv('TRAINING_SET_ROOT_DIR', 'training_sets')
+    app.logger.info("LOG_LEVEL: " + app.config['LOG_LEVEL'])
+    app.logger.info("TRAINING_SET_ROOT_DIR: " + app.config['TRAINING_SET_ROOT_DIR'])
     for set_name in get_training_sets():
         app.logger.info(f"{set_name}: {get_image_names(set_name)}")
 
@@ -81,7 +76,7 @@ with app.app_context():
 
 @app.route('/training_sets/<set_name>/<filename>')
 def serve_media(set_name, filename):
-    folder_path = safe_join(get_training_set_root_dir(), set_name)
+    folder_path = safe_join(app.config['TRAINING_SET_ROOT_DIR'], set_name)
     return send_from_directory(folder_path, filename)
 
 @app.route('/')
@@ -89,14 +84,15 @@ def serve_media(set_name, filename):
 def viewer():
     set_name = request.args.get('set')
     index = int(request.args.get('index', 0))
+    root_dir = app.config['TRAINING_SET_ROOT_DIR']
     if not set_name or set_name not in get_training_sets():
         set_name = get_training_sets()[0]
     # Pick current image/audio pair
     images = get_image_names(set_name)
     current_base = images[index % len(images)]
-    img_src = f"/{get_training_set_root_dir()}/{set_name}/{current_base}.jpg"
-    audio_src = f"/{get_training_set_root_dir()}/{set_name}/{current_base}.m4a"
-    audio_file = os.path.join(get_training_set_root_dir(), set_name, f"{current_base}.m4a")
+    img_src = f"/{root_dir}/{set_name}/{current_base}.jpg"
+    audio_src = f"/{root_dir}/{set_name}/{current_base}.m4a"
+    audio_file = os.path.join(root_dir, set_name, f"{current_base}.m4a")
     # Prepare audio tag if file exists
     audio_tag = ""
     if os.path.isfile(audio_file):
@@ -114,7 +110,7 @@ def about():
         'Platform': platform.system(),
         'Python Version': platform.python_version(),
         'Working Directory': os.getcwd(),
-        'Training_Set Directory': get_training_set_root_dir()
+        'Training_Set Directory': app.config['TRAINING_SET_ROOT_DIR']
     }
     environment_variables_info = {
         'TRAINING_SET_ROOT_DIR': os.getenv("TRAINING_SET_ROOT_DIR"),
